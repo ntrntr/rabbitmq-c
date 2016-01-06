@@ -67,11 +67,18 @@
 #if __GNUC__ > 2 || (__GNUC__ == 2 && __GNUC_MINOR__ > 4)
 #define AMQP_NORETURN \
   __attribute__ ((__noreturn__))
-#define AMQP_UNUSED \
-  __attribute__ ((__unused__))
+#define AMQP_UNUSED(x) \
+  __attribute__ ((__unused__)) x
+#elif defined(_MSC_VER)
+#define AMQP_NORETURN __declspec(noreturn)
+#define AMQP_UNUSED(x) \
+    __pragma(warning(push)) \
+    __pragma(warning(suppress:4100)) \
+    x \
+    __pragma(warning(pop))
 #else
 #define AMQP_NORETURN
-#define AMQP_UNUSED
+#define AMQP_UNUSED(x)
 #endif
 
 #if __GNUC__ >= 4

@@ -141,7 +141,7 @@ int amqp_bytes_malloc_dup_failed(amqp_bytes_t bytes) {
 
 amqp_rpc_reply_t
 amqp_consume_message(amqp_connection_state_t state, amqp_envelope_t *envelope,
-                     struct timeval *timeout, AMQP_UNUSED int flags)
+                     struct timeval *timeout, AMQP_UNUSED(int flags))
 {
   int res;
   amqp_frame_t frame;
@@ -202,7 +202,7 @@ error_out1:
 amqp_rpc_reply_t amqp_read_message(amqp_connection_state_t state,
                                    amqp_channel_t channel,
                                    amqp_message_t *message,
-                                   AMQP_UNUSED int flags)
+                                   AMQP_UNUSED(int flags))
 {
   amqp_frame_t frame;
   amqp_rpc_reply_t ret;

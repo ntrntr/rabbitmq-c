@@ -77,7 +77,7 @@ struct amqp_ssl_socket_t {
 };
 
 static ssize_t amqp_ssl_socket_send(void *base, const void *buf, size_t len,
-                                    AMQP_UNUSED int flags) {
+                                    AMQP_UNUSED(int flags)) {
   struct amqp_ssl_socket_t *self = (struct amqp_ssl_socket_t *)base;
   int res;
   if (-1 == self->sockfd) {
@@ -125,7 +125,7 @@ static ssize_t
 amqp_ssl_socket_recv(void *base,
                      void *buf,
                      size_t len,
-                     AMQP_UNUSED int flags)
+                     AMQP_UNUSED(int flags))
 {
   struct amqp_ssl_socket_t *self = (struct amqp_ssl_socket_t *)base;
   int received;
@@ -404,10 +404,10 @@ amqp_ssl_socket_set_key(amqp_socket_t *base,
 }
 
 static int
-password_cb(AMQP_UNUSED char *buffer,
-            AMQP_UNUSED int length,
-            AMQP_UNUSED int rwflag,
-            AMQP_UNUSED void *user_data)
+password_cb(AMQP_UNUSED(char *buffer),
+            AMQP_UNUSED(int length),
+            AMQP_UNUSED(int rwflag),
+            AMQP_UNUSED(void *user_data))
 {
   amqp_abort("rabbitmq-c does not support password protected keys");
 }
@@ -576,8 +576,8 @@ amqp_ssl_threadid_callback(void)
 
 void
 amqp_ssl_locking_callback(int mode, int n,
-                          AMQP_UNUSED const char *file,
-                          AMQP_UNUSED int line)
+                          AMQP_UNUSED(const char *file),
+                          AMQP_UNUSED(int line))
 {
   if (mode & CRYPTO_LOCK) {
     if (pthread_mutex_lock(&amqp_openssl_lockarray[n])) {
